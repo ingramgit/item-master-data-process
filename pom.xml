@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dataverse-integration</groupId>
   <artifactId>find-day-process</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>kjar</packaging>
   <name>find-day-process</name>
   <description></description>
