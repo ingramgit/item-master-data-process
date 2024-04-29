@@ -4,7 +4,7 @@ import com.ingram.dataverse.model.FindDay;
 import com.ingram.dataverse.Utility;
 
 rule "Find a day for the date"
-    ruleflow-group 'UpdateProductInventory'
+    ruleflow-group 'findDay'
 	when 
 		f: FindDay()
 	then
