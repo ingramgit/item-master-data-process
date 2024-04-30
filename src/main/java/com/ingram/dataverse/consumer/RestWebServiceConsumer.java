@@ -37,6 +37,7 @@ public class RestWebServiceConsumer implements java.io.Serializable {
     	    HttpClient client = HttpClient.newBuilder().build();
     	    HttpRequest request = HttpRequest.newBuilder()
     	            .setHeader("Authorization", token)
+    	            .setHeader("Content-Type", "application/json")
     	            .uri(URI.create(uri))
     	            .POST(BodyPublishers.ofString(data))
     	            .build();
