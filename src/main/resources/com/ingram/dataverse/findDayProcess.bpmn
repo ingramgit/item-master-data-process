@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_mTB_kAbjEe-mU--srMtlag" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_6H_-4AbjEe-mU--srMtlag" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
   <bpmn2:itemDefinition id="_findDayItem" structureRef="com.ingram.dataverse.model.FindDay"/>
   <bpmn2:itemDefinition id="__6D2BEB69-629E-44F8-8B40-A94F96EC43F9_namespaceInputXItem" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="__6D2BEB69-629E-44F8-8B40-A94F96EC43F9_modelInputXItem" structureRef="java.lang.String"/>
@@ -25,7 +25,7 @@
           <drools:metaValue><![CDATA[weekday]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_mTB_kQbjEe-mU--srMtlag" language="http://www.java.com/java"><![CDATA[com.ingram.dataverse.model.FindDay f = (com.ingram.dataverse.model.FindDay)kcontext.getVariable("findDay");
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_6IAl8AbjEe-mU--srMtlag" language="http://www.java.com/java"><![CDATA[com.ingram.dataverse.model.FindDay f = (com.ingram.dataverse.model.FindDay)kcontext.getVariable("findDay");
 
 return !"Saturday".equalsIgnoreCase(f.getDay()) 
     && !"Sunday".equalsIgnoreCase(f.getDay());]]></bpmn2:conditionExpression>
@@ -40,7 +40,7 @@ return !"Saturday".equalsIgnoreCase(f.getDay())
           <drools:metaValue><![CDATA[Weekend]]></drools:metaValue>
         </drools:metaData>
       </bpmn2:extensionElements>
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_mTB_kgbjEe-mU--srMtlag" language="http://www.java.com/java"><![CDATA[com.ingram.dataverse.model.FindDay f = (com.ingram.dataverse.model.FindDay)kcontext.getVariable("findDay");
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="_6IAl8QbjEe-mU--srMtlag" language="http://www.java.com/java"><![CDATA[com.ingram.dataverse.model.FindDay f = (com.ingram.dataverse.model.FindDay)kcontext.getVariable("findDay");
 
 return "Saturday".equalsIgnoreCase(f.getDay()) 
       || "Sunday".equalsIgnoreCase(f.getDay());]]></bpmn2:conditionExpression>
@@ -71,6 +71,11 @@ return "Saturday".equalsIgnoreCase(f.getDay())
       </bpmn2:extensionElements>
       <bpmn2:incoming>_D93ACFAC-3D38-4F6F-9EAF-17CC1D8622D9</bpmn2:incoming>
       <bpmn2:outgoing>_06F17310-991C-4D26-A44D-69134DA2269F</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[System.out.println("************ Begin: Calling Python API to send metadata of the file *************");
+String url = "http://172.169.184.125/kie-server/services/rest/server/containers/instances/find-day-process_1.0.1";    
+ String request = "{\"key\":\"product_tims\",\"config\":{\"delimiter\":\"|\",\"file_type\":\"flat\",\"chunk_size\":1000},\"source_type\":\"file\",\"source\":\"ITEM_ID,TITLE,ISBN_ID,LANGUAGE_NAME,MEDIA_TYPE_NAME,PUB_DT,TTL_AVL_DT,IBC_STATUS\",\"source_path\":\"D:\\\\IngramData\\\\latest\\\\\",\"source_filename\":\"IngramItemTims.txt\",\"destination_path\":\"D:\\\\IngramData\\\\Destination\\\\\"}";
+com.ingram.dataverse.consumer.RestWebServiceConsumer.post(url, request);
+System.out.println("************ End: Calling Python API to send metadata of the file *************");]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:inclusiveGateway id="_B6E89714-9BE5-4DC0-9287-2928A0C06E6A" gatewayDirection="Converging">
       <bpmn2:incoming>_E441FE1C-3F98-4111-8548-B0887E1F5D8C</bpmn2:incoming>
@@ -138,28 +143,28 @@ kcontext.setVariable("findDay", f);
       </bpmn2:extensionElements>
       <bpmn2:incoming>_17F51CD9-D425-4009-A778-58218494BABE</bpmn2:incoming>
       <bpmn2:outgoing>_BEB00880-5CEF-4666-9BC5-C465D0930325</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="_mTB_kwbjEe-mU--srMtlag">
+      <bpmn2:ioSpecification id="_6IAl8gbjEe-mU--srMtlag">
         <bpmn2:dataInput id="_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayInputX" drools:dtype="com.ingram.dataverse.model.FindDay" itemSubjectRef="__6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayInputXItem" name="findDay"/>
         <bpmn2:dataOutput id="_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayOutputX" drools:dtype="com.ingram.dataverse.model.FindDay" itemSubjectRef="__6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayOutputXItem" name="findDay"/>
-        <bpmn2:inputSet id="_mTB_lAbjEe-mU--srMtlag">
+        <bpmn2:inputSet id="_6IAl8wbjEe-mU--srMtlag">
           <bpmn2:dataInputRefs>_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayInputX</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="_mTB_lQbjEe-mU--srMtlag">
+        <bpmn2:outputSet id="_6IAl9AbjEe-mU--srMtlag">
           <bpmn2:dataOutputRefs>_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayOutputX</bpmn2:dataOutputRefs>
         </bpmn2:outputSet>
       </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="_mTB_lgbjEe-mU--srMtlag">
+      <bpmn2:dataInputAssociation id="_6IAl9QbjEe-mU--srMtlag">
         <bpmn2:sourceRef>findDay</bpmn2:sourceRef>
         <bpmn2:targetRef>_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayInputX</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
-      <bpmn2:dataOutputAssociation id="_mTB_lwbjEe-mU--srMtlag">
+      <bpmn2:dataOutputAssociation id="_6IAl9gbjEe-mU--srMtlag">
         <bpmn2:sourceRef>_6D2BEB69-629E-44F8-8B40-A94F96EC43F9_findDayOutputX</bpmn2:sourceRef>
         <bpmn2:targetRef>findDay</bpmn2:targetRef>
       </bpmn2:dataOutputAssociation>
     </bpmn2:businessRuleTask>
   </bpmn2:process>
-  <bpmndi:BPMNDiagram id="_mTB_mAbjEe-mU--srMtlag">
-    <bpmndi:BPMNPlane id="_mTB_mQbjEe-mU--srMtlag" bpmnElement="find-day-process.findDayProcess">
+  <bpmndi:BPMNDiagram id="_6IAl9wbjEe-mU--srMtlag">
+    <bpmndi:BPMNPlane id="_6IAl-AbjEe-mU--srMtlag" bpmnElement="find-day-process.findDayProcess">
       <bpmndi:BPMNShape id="shape__6D2BEB69-629E-44F8-8B40-A94F96EC43F9" bpmnElement="_6D2BEB69-629E-44F8-8B40-A94F96EC43F9">
         <dc:Bounds height="55.0" width="118.0" x="449.0" y="109.0"/>
       </bpmndi:BPMNShape>
@@ -223,12 +228,12 @@ kcontext.setVariable("findDay", f);
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
-  <bpmn2:relationship id="_mTB_mgbjEe-mU--srMtlag" type="BPSimData">
+  <bpmn2:relationship id="_6IAl-QbjEe-mU--srMtlag" type="BPSimData">
     <bpmn2:extensionElements>
       <bpsim:BPSimData>
         <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
           <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters"/>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D2BEB69-629E-44F8-8B40-A94F96EC43F9" id="_mTB_mwbjEe-mU--srMtlag">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_6D2BEB69-629E-44F8-8B40-A94F96EC43F9" id="_6IAl-gbjEe-mU--srMtlag">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
@@ -248,34 +253,14 @@ kcontext.setVariable("findDay", f);
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B0AE288E-2ABE-418C-B2DB-6208A6B4DB66" id="_mTB_nAbjEe-mU--srMtlag">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_B0AE288E-2ABE-418C-B2DB-6208A6B4DB66" id="_6IAl-wbjEe-mU--srMtlag">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
               </bpsim:ProcessingTime>
             </bpsim:TimeParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_AB784C3F-C09B-4F91-93B2-02F8096C4232" id="_mTB_nQbjEe-mU--srMtlag">
-            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
-              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
-                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
-              </bpsim:ProcessingTime>
-            </bpsim:TimeParameters>
-            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
-              <bpsim:Availability xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="0.0"/>
-              </bpsim:Availability>
-              <bpsim:Quantity xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="0.0"/>
-              </bpsim:Quantity>
-            </bpsim:ResourceParameters>
-            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
-              <bpsim:UnitCost xsi:type="bpsim:Parameter">
-                <bpsim:FloatingParameter value="0.0"/>
-              </bpsim:UnitCost>
-            </bpsim:CostParameters>
-          </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_21586C89-A3BD-4104-8111-208B55600C92" id="_mTB_ngbjEe-mU--srMtlag">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_AB784C3F-C09B-4F91-93B2-02F8096C4232" id="_6IAl_AbjEe-mU--srMtlag">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
@@ -295,7 +280,27 @@ kcontext.setVariable("findDay", f);
               </bpsim:UnitCost>
             </bpsim:CostParameters>
           </bpsim:ElementParameters>
-          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_12204321-AE25-4D13-A97B-856E842F6C4C" id="_mTB_nwbjEe-mU--srMtlag">
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_21586C89-A3BD-4104-8111-208B55600C92" id="_6IAl_QbjEe-mU--srMtlag">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_12204321-AE25-4D13-A97B-856E842F6C4C" id="_6IAl_gbjEe-mU--srMtlag">
             <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
               <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
                 <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
@@ -318,7 +323,7 @@ kcontext.setVariable("findDay", f);
         </bpsim:Scenario>
       </bpsim:BPSimData>
     </bpmn2:extensionElements>
-    <bpmn2:source>_mTB_kAbjEe-mU--srMtlag</bpmn2:source>
-    <bpmn2:target>_mTB_kAbjEe-mU--srMtlag</bpmn2:target>
+    <bpmn2:source>_6H_-4AbjEe-mU--srMtlag</bpmn2:source>
+    <bpmn2:target>_6H_-4AbjEe-mU--srMtlag</bpmn2:target>
   </bpmn2:relationship>
 </bpmn2:definitions>
