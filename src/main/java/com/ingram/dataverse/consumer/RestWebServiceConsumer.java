@@ -33,9 +33,10 @@ public class RestWebServiceConsumer implements java.io.Serializable {
     	    return response.body();
 	}
 	
-	public static Object post(String uri, String data) throws Exception {
+	public static Object post(String uri, String data, String token) throws Exception {
     	    HttpClient client = HttpClient.newBuilder().build();
     	    HttpRequest request = HttpRequest.newBuilder()
+    	            .setHeader("Authorization", token)
     	            .uri(URI.create(uri))
     	            .POST(BodyPublishers.ofString(data))
     	            .build();
