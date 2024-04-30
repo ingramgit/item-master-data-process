@@ -20,7 +20,6 @@ public class RestWebServiceConsumer implements java.io.Serializable {
     public RestWebServiceConsumer() {
     }
 
-
     public static String get(String uri) throws Exception {
     	    HttpClient client = HttpClient.newHttpClient();
     	    HttpRequest request = HttpRequest.newBuilder()
