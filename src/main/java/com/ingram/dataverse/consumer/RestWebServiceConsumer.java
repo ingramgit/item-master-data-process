@@ -42,7 +42,7 @@ public class RestWebServiceConsumer implements java.io.Serializable {
     	            .POST(BodyPublishers.ofString(data))
     	            .build();
     
-    	    HttpResponse<?> response = client.send(request, BodyHandlers.discarding());
+    	    HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
     	    logger.info("Status Code = " + response.statusCode() + ", Response = "+ response.body());
     	    return response.body();
 	}
