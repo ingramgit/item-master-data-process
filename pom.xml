@@ -6,7 +6,7 @@
   <artifactId>find-day-process</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <packaging>kjar</packaging>
-  <name>find-day-process</name>
+  <name>item-master-data-process</name>
   <description></description>
   <dependencies>
     <dependency>
